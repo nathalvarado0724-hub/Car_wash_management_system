@@ -1,0 +1,79 @@
+    .para, .subhead, .headings {
+      text-align: center;
+      padding: 5px;
+    }
+    .headings {
+      padding-top: 40px;
+      color:#2c3e50;
+    }
+    .welcome-section {
+      padding: 60px 20px;
+      text-align: center;
+      background-color: #d9e4f5;
+    }
+    .welcome-section h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .welcome-section p {
+      font-size: 1.2rem;
+      color: #2c3e50;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+.my-carousel-wrapper {
+  max-height: 70%;
+  margin: 0 auto; /* centers the carousel */
+  padding: 15px; /* adds padding around the carousel */
+  box-sizing: border-box; /* ensures padding doesn't increase width */
+}
+
+.my-carousel-wrapper .carousel-item img {
+  border-radius: 10px; /* optional, rounds image corners */
+  object-fit: cover; /* ensures image covers the area */
+  
+}
+.link-service a {
+  display:inline-block;      /* Make the link behave like a button */
+  background-color: #7089ad;  /* Dark blue background */
+  color: white;               /* White text */
+  padding: 8px 16px;          /* Space inside the button */
+  border-radius: 5px;         /* Rounded corners */
+  text-decoration: none;      /* Remove underline */
+  font-family: Arial, sans-serif; /* Clean font */
+  font-size: 20px;
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+  text-align:center;
+
+}
+.link-service{
+    padding-top: 20px;
+    float: right;
+}
+.link-service a:hover {
+  background-color: #0A2A35;  /* Darker shade on hover */
+}
+.about-us{ 
+    padding-top: 20px;
+    text-align: center;
+  
+}
+.about{
+display:block;      /* Make the link behave like a button */
+  background-color: #7089ad;  /* Dark blue background */
+  color: white;               /* White text */
+  padding: 8px 16px;          /* Space inside the button */
+  border-radius: 5px;         /* Rounded corners */
+  text-decoration: none;      /* Remove underline */
+  font-family: 'Limelight', sans-serif; /* Clean font */
+  font-size: 35px;
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+  text-align:center;
+}
+.title{
+  font-size: 60px;
+}
+.paragraph{
+  font-size:30px;
+}

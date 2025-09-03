@@ -1,0 +1,85 @@
+body {
+    background-image: url("https://png.pngtree.com/thumb_back/fw800/background/20250804/pngtree-blue-abstract-water-splash-with-dynamic-motion-and-glowing-light-effects-image_17694989.webp");
+    background-position: center;
+    background-size: cover;
+    height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: cursive;
+  }
+  
+  .login-box {
+    width: 320px;
+    background: radial-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
+    box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    border-radius: 20px;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+  }
+  
+  .login-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: block;
+    object-fit: cover;
+    border: 2px solid white;
+  }
+  
+  input[type="text"], input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+    .toggle-icon {
+        position: absolute;
+        right: 35px;
+        top: 68%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #444;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .input-wrapper {
+  position: relative;
+  width: 90%;
+  margin: 0 auto 10px;
+}
+
+.input-wrapper input[type="password"] {
+  width: 100%;
+  padding-right: 40px; /* space for icon */
+  font-size: 16px;
+  padding: 10px;
+}
+
+.toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #444;
+  font-size: 18px;
+}
+
+
+.login{
+  color: white;
+  padding-left:25px;
+}
