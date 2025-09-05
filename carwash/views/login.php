@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-     <form action="">
+     <form action="../page/login_process.php" method="POST">
          <div class=" login-box">
             <img src ="../assets/logo.png" alt="Logo" class="login-img">
 
@@ -20,9 +21,9 @@
             <input type ="text" name="name" placeholder="Your Fullname">
              <h4>Password:</h4>
             <div>
-            <input type ="text" name="pass" placeholder="Your password">
+            <input type="password" name="pass" placeholder="Your password">
               <br><br>
-            <button type="submit" name="LOGIN">Login</button>
+            <button type="submit" name="login">Login</button>
             
         </div>
 

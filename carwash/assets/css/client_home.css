@@ -77,3 +77,9 @@ display:block;      /* Make the link behave like a button */
 .paragraph{
   font-size:30px;
 }
+/* Why Choose Us Section */
+.why-choose-us {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  
+}

@@ -13,7 +13,7 @@
    
 </head>
 <body>
-    <form action="">
+     <form action="../page/register_process.php" method="POST">
          <div class=" login-box">
             <img src ="../assets/logo.png" alt="Logo" class="login-img">
 
@@ -30,9 +30,9 @@
             <input type ="text" name="contact" placeholder="Your Contact number">
              <h4>Password:</h4>
             <div>
-            <input type ="text" name="pass" placeholder="Your password">
+            <input type ="password" name="pass" placeholder="Your password">
               <br><br>
-            <button type="submit" name="LOGIN">Register</button>
+            <button type="submit" name="register">Register</button>
             
         </div>
 
