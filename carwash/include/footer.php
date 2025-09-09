@@ -42,7 +42,6 @@
             <li><a href="home.php">Home</a></li>
             <li><a href="service.php">Services</a></li>
             <li><a href="contact.php">Contact</a></li>
-            <li><a href="login.php">Login</a></li>
           </ul>
         </div>
       </div>

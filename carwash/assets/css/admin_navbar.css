@@ -1,0 +1,83 @@
+  body {
+    overflow-x: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f6fa;
+  }
+
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #cfd9e7; /* Light blue like the homepage */
+    color: #333;
+    position: fixed;
+    border-right: 1px solid #d0d7de;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+  }
+
+  .sidebar .nav-link {
+    color: #333;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-bottom: 5px;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .sidebar .nav-link:hover,
+  .sidebar .nav-link.active {
+    background-color: #aec4df;
+    color: #000;
+  }
+
+  .sidebar .nav-link i {
+    margin-right: 10px;
+  }
+
+  .sidebar h4 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2a2f45;
+  }
+
+  .dropdown-menu {
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+
+  .dropdown-item:hover {
+    background-color: #e2eaf1;
+  }
+
+  .nav-link.text-danger {
+    color: #c0392b !important;
+  }
+
+  .content {
+    margin-left: 250px;
+    padding: 2rem;
+  }
+  .logo-img {
+  max-width: 120px;
+  height: auto;
+  border-radius: 12px; /* Makes the image corners rounded */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+.sidebar-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%; /* Makes it circular */
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.sidebar-logo:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}

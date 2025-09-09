@@ -1,6 +1,6 @@
 <?php
 session_start();
-// Optional: Check if user is logged in
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
@@ -37,11 +37,45 @@ if (!isset($_SESSION['user_id'])) {
           <span>CrystalClean</span>
         </div>
         <ul class="horizontal-list">
-          <li><a href="home.php" class="nav-link active"><i class="fa-solid fa-house"></i><span class="link-text">Home</span></a></li>
-          <li><a href="service.php" class="nav-link"><i class="fa-solid fa-bell-concierge"></i><span class="link-text">Service</span></a></li>
-          <li><a href="contact.php" class="nav-link"><i class="fa-solid fa-phone"></i><span class="link-text">Contact</span></a></li>
-          <li><a href="admin.php" class="nav-link"><i class="fa-solid fa-gauge"></i><span class="link-text">Dashboard</span></a></li>
-          <li><a href="login.php" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i><span class="link-text">Logout</span></a></li>
+          <li>
+            <a href="home.php" class="nav-link active">
+              <i class="fa-solid fa-house"></i
+              ><span class="link-text">Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="service.php" class="nav-link">
+              <i class="fa-solid fa-bell-concierge"></i>
+              <span class="link-text">Service</span></a>
+          </li>
+          <li>
+            <a href="contact.php" class="nav-link">
+              <i class="fa-solid fa-phone"></i>
+              <span class="link-text">Contact</span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="bookingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Booking
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="bookingDropdown">
+              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#appointmentModal">Make an Appointment</a></li>
+              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#bookingModal"> View Bookings</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="./admin/admin_login.php" class="nav-link">
+             <i class="fa-solid fa-user-tie"></i>
+              <span class="link-text">Admin</span>
+            </a>
+          </li>
+<li>
+  <a href="login.php" class="nav-link" onclick="return confirmLogout();">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    <span class="link-text">Logout</span>
+  </a>
+</li>
+
         </ul>
       </div>
     </div>
@@ -64,29 +98,37 @@ if (!isset($_SESSION['user_id'])) {
             <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="3" aria-label="Slide 4"></button>
           </div>
 
           <!-- Slides -->
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="https://www.carnawash.com.au/wp-content/uploads/2025/03/carwash.jpg" class="d-block w-100" alt="Car wash">
+              <img src="https://baraqcleancarwash.com/wp-content/uploads/2025/01/beautiful-car-washing-service-scaled.jpg" class="d-block w-100" alt="Car wash">
               <div class="carousel-caption d-none d-md-block">
-                <h5>First Slide</h5>
-                <p>Description for first slide.</p>
+                <h5>Exterior Wash</h5>
+                <p>Basic cleaning of the vehicle's exterior, often including hand wash, rinse, and drying.</p>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://media.istockphoto.com/id/1800033825/photo/hand-cleaning-the-car-interior-with-microfiber-cloth-towel.jpg?s=612x612&w=0&k=20&c=bz4YG60xCvOifo0jz1BbThdW0lA1hWS9I85o-Wdxj0A=" class="d-block w-100" alt="Interior cleaning">
+              <img src="https://images.squarespace-cdn.com/content/v1/5cf81863a20dd2000179f584/639a56d3-dc72-4d15-afba-0e673ca24113/vci95f5uTDnY4U2ThLdxK2ABTAw9XvkP1671030463.jpg" class="d-block w-100" alt="Interior cleaning">
               <div class="carousel-caption d-none d-md-block">
-                <h5>Second Slide</h5>
-                <p>Description for second slide.</p>
+                <h5>Interior Cleaning</h5>
+                <p>Vacuuming, dusting, and cleaning of the vehicle's interior surfaces.</p>
               </div>
             </div>
             <div class="carousel-item">
-              <img src="https://abaacservices.com/wp-content/uploads/2025/06/Car-Wash-Services-Near-You-in-Dabar-WhatMakes-This-Service-Stand-Out.webp" class="d-block w-100" alt="Exterior wash">
+              <img src="https://mawdetailcenter.com/wp-content/uploads/2022/05/shine-shop.jpg" class="d-block w-100" alt="Exterior wash">
               <div class="carousel-caption d-none d-md-block">
-                <h5>Third Slide</h5>
-                <p>Description for third slide.</p>
+                <h5>Detailing</h5>
+                <p>Comprehensive cleaning that may include waxing, polishing, and engine cleaning.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="https://i.ytimg.com/vi/-EtS34QZIkg/maxresdefault.jpg" class="d-block w-100" alt="Exterior wash">
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Express Wash</h5>
+                <p>Quick service focusing on exterior cleaning, typically without interior detailing.</p>
               </div>
             </div>
           </div>
@@ -226,6 +268,13 @@ if (!isset($_SESSION['user_id'])) {
 
     </div> <!-- End content -->
     
-     <?php include '../include/footer.php'; ?>
+<script>
+  function confirmLogout() {
+    return confirm("Are you sure you want to log out?");
+  }
+</script>
+       <?php include 'appointment_modal.php'; ?>
+     <?php include 'booking_modal.php'; ?>
+ <?php include '../include/footer.php'; ?>
   </body>
   </html>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,7 @@
   <title>Contact</title>
   <!-- css -->
   <link rel="stylesheet" href="../assets/css/client_navbar.css" />
+  <link rel="stylesheet" href="../assets/css/client_contact.css" />
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
   <!-- Bootstrap CSS -->
@@ -16,7 +18,7 @@
       background-color: #f8f9fa;
     }
     .contact-header {
-      background-color: #7089ad;
+      background-color: #7089adff;
       color: white;
       text-align: center;
       padding: 50px 0;
@@ -54,11 +56,45 @@
         <span>CrystalClean</span>
       </div>
       <ul class="horizontal-list">
-        <li><a href="home.php" class="nav-link"><i class="fa-solid fa-house"></i> <span class="link-text">Home</span></a></li>
-        <li><a href="service.php" class="nav-link"><i class="fa-solid fa-bell-concierge"></i> <span class="link-text">Service</span></a></li>
-        <li><a href="contact.php" class="nav-link active"><i class="fa-solid fa-phone"></i> <span class="link-text">Contact</span></a></li>
-        <li><a href="admin.php" class="nav-link"><i class="fa-solid fa-gauge"></i> <span class="link-text">Dashboard</span></a></li>
-        <li><a href="login.php" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i> <span class="link-text">Logout</span></a></li>
+        <li>
+          <a href="home.php" class="nav-link">
+            <i class="fa-solid fa-house"></i> 
+            <span class="link-text">Home</span>
+          </a>
+        </li>
+        <li>
+          <a href="service.php" class="nav-link">
+            <i class="fa-solid fa-bell-concierge"></i>
+             <span class="link-text">Service</span>
+          </a>
+        </li>
+        <li>
+          <a href="contact.php" class="nav-link active">
+            <i class="fa-solid fa-phone"></i> 
+            <span class="link-text">Contact</span>
+          </a>
+        </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="bookingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Booking
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="bookingDropdown">
+              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#appointmentModal">Make an Appointment</a></li>
+              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#bookingModal"> View Bookings</a></li>
+            </ul>
+          </li>
+        <li>
+         <a href="./admin/admin_login.php" class="nav-link">
+      <i class="fa-solid fa-user-tie"></i>
+             <span class="link-text">Admin</span>
+          </a>
+        </li>
+        <li>
+          <a href="login.php" class="nav-link" onclick="return confirmLogout();">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span class="link-text">Logout</span>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
@@ -87,38 +123,54 @@
         <!-- Contact Form -->
         <div class="col-md-8">
           <h4 class="mb-4">Get In Touch</h4>
-          <form id="contactForm">
-            <div class="row mb-3">
-              <div class="col-md-6"><input type="text" class="form-control" placeholder="Your Name" required></div>
-              <div class="col-md-6"><input type="email" class="form-control" placeholder="Your Email" required></div>
-            </div>
-            <div class="mb-3">
-              <input type="text" class="form-control" placeholder="Subject" required>
-            </div>
-            <div class="mb-3">
-              <textarea class="form-control" rows="4" placeholder="Message" required></textarea>
-            </div>
-
-            <!-- Rating -->
-            <div class="mb-3">
-              <label class="d-block">Rate Us:</label>
-              <div id="star-rating">
-                <i class="fa fa-star" data-value="1"></i>
-                <i class="fa fa-star" data-value="2"></i>
-                <i class="fa fa-star" data-value="3"></i>
-                <i class="fa fa-star" data-value="4"></i>
-                <i class="fa fa-star" data-value="5"></i>
+         <form id="contactForm" method="POST" action="../page/contact_process.php">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <input type="number" class="form-control" name="contact_number" placeholder="Your Phone" required>
+                </div>
+                <div class="col-md-6">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                </div>
               </div>
-              <input type="hidden" name="rating" id="rating-value" required>
-            </div>
-
-            <button type="submit" class="btn btn-danger">Send Message</button>
-          </form>
+              <div class="mb-3">
+                <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+              </div>
+              <div class="mb-3">
+                <textarea class="form-control" rows="4" name="message" placeholder="Message" required></textarea>
+              </div>
+            
+              <div class="mb-3">
+                <label class="d-block">Rate Us:</label>
+                <div id="star-rating">
+                  <i class="fa fa-star" data-value="1"></i>
+                  <i class="fa fa-star" data-value="2"></i>
+                  <i class="fa fa-star" data-value="3"></i>
+                  <i class="fa fa-star" data-value="4"></i>
+                  <i class="fa fa-star" data-value="5"></i>
+                </div>
+                <input type="hidden" name="rating" id="rating-value">
+              </div>
+            
+              <button type="submit" class="btn btn-danger" name="submit">Send Message</button>
+            </form>
           <div id="successMessage" class="alert alert-success mt-3 d-none">
             ✅ Thank you for your feedback!
           </div>
+
         </div>
       </div>
+          <!-- Google Map Embed -->
+<div class="mt-5">
+  <h5 class="mb-3">Find Us on Map</h5>
+  <div class="map-responsive">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.905217205667!2d-74.0059726845942!3d40.71277597933042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQyJzQ2LjAiTiA3NMKwMDAnMjMuNiJX!5e0!3m2!1sen!2sus!4v1614252787413!5m2!1sen!2sus"
+      width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</div>
+
     </div>
   </section>
 
@@ -160,19 +212,15 @@
       }
     }
 
-    // Handle form submit
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      if (!ratingValue.value) {
-        alert("Please select a rating before submitting.");
-        return;
-      }
-      successMessage.classList.remove('d-none');
-      form.reset();
-      ratingValue.value = "";
-      resetStars();
-    });
   </script>
+  
+<script>
+  function confirmLogout() {
+    return confirm("Are you sure you want to log out?");
+  }
+</script>
+<?php include 'booking_modal.php'; ?>
+  <?php include 'appointment_modal.php'; ?>
     <?php include '../include/footer.php'; ?>
 </body>
 </html>
