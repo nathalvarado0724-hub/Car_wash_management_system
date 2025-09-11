@@ -18,28 +18,49 @@
             <img src ="../assets/logo.png" alt="Logo" class="login-img">
 
            <br/>
-            <h4>Name:</h4>
-            <div>
-            <input type ="text" name="name" placeholder="Your Fullname">
-             <h4>Email:</h4>
-            <div>
-            <input type ="text" name="email" placeholder="Your Email">
-            </div>
-             <h4>Contact number:</h4>
-            <div>
-            <input type ="text" name="contact" placeholder="Your Contact number">
+              <h4>Name:</h4>
+              <div>
+               <input type ="text" name="name" placeholder="Your Fullname">
+              </div>
+  
+               <h4>Email:</h4>
+              <div>
+              <input type ="text" name="email" placeholder="Your Email">
+              </div>
+  
+               <h4>Contact number:</h4>
+              <div>
+              <input type ="text" name="contact" placeholder="Your Contact number">
+              </div>
+
              <h4>Password:</h4>
-            <div>
-            <input type ="password" name="pass" placeholder="Your password">
-              <br><br>
-            <button type="submit" name="register">Register</button>
-            
-        </div>
+<div class="input-wrapper">
+  <input type="password" name="pass" placeholder="Your password" id="password">
+  <i class="fa fa-eye toggle-icon" id="togglePassword"></i>
+</div>
+ <br><br>
+
+              <button type="submit" name="register">Register</button>
+              
+          </div>
 
         <div class="login">
-    <p>Already Have An Account? <a href="./login.php">Login</a></p>
-  </div>
+          <p>Already Have An Account? <a href="./login.php">Login</a></p>
+        </div>
     </form>
+<script>
+  const togglePassword = document.querySelector('#togglePassword');
+  const password = document.querySelector('#password');
+
+  togglePassword.addEventListener('click', function () {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    
+    // toggle the eye / eye-slash icon
+    this.classList.toggle('fa-eye-slash');
+  });
+</script>
 
 </body>
 </html>

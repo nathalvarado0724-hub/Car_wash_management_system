@@ -1,3 +1,6 @@
+<?php include '../page/services_data.php';?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +14,10 @@
         <!-- Bootstrap CSS (v3.4.1) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- In <head> -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <style>
       body {
       background-color: #f8f9fa;
@@ -25,6 +32,45 @@
       font-size: 2rem;
       font-weight: bold;
     }
+    .flip-card {
+  perspective: 1000px;
+  width: 100%;
+  max-height: 200px;
+  overflow: hidden;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+.flip-card-front img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.flip-card-back {
+  background-image: url("../assets/logo.png");
+  background-repeat:no-repeat;
+     background-position: center;
+    background-size: cover;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotateY(180deg);
+}
+
   </style>
 </head>
 <body>
@@ -85,68 +131,47 @@
   </section>
 
    
-<section class="services-section py-5">
-  <div class="container">
-    <h3 class="text-center mb-5">Choose Your Plan</h3>
-    <div class="row justify-content-center">
-      
-      <!-- Basic Cleaning -->
-      <div class="col-md-4 mb-4">
-        <div class="card text-center h-100 shadow">
-          <div class="card-body">
-            <h5 class="card-title text-uppercase">Basic Cleaning</h5>
-            <h2 class="card-price">Rs. <span class="fs-1">100</span>.99</h2>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li><i class="fa-solid fa-check text-success"></i> Seats Washing</li>
-              <li><i class="fa-solid fa-check text-success"></i> Vacuum Cleaning</li>
-              <li><i class="fa-solid fa-check text-success"></i> Exterior Cleaning</li>
-              <li><i class="fa-solid fa-times text-danger"></i> Interior Wet Cleaning</li>
-              <li><i class="fa-solid fa-times text-danger"></i> Window Wiping</li>
-            </ul>
-            <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#appointmentModal">Book Now</a>
-          </div>
-        </div>
-      </div>
+<h2 class="text-center my-4"> <span>Car Wash</span> Services </h2>
+<p class="text-center my-4"> Choose from a range of car cleaning services including exterior washing,
+   interior cleaning, full detailing, and quick express washes to keep your vehicle looking its best.</p>
 
-      <!-- Premium Cleaning -->
-      <div class="col-md-4 mb-4">
-        <div class="card text-center h-100 shadow border-primary">
-          <div class="card-body">
-            <h5 class="card-title text-uppercase text-danger">Premium Cleaning</h5>
-            <h2 class="card-price text-danger">Rs. <span class="fs-1">200</span>.99</h2>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li><i class="fa-solid fa-check text-success"></i> Seats Washing</li>
-              <li><i class="fa-solid fa-check text-success"></i> Vacuum Cleaning</li>
-              <li><i class="fa-solid fa-check text-success"></i> Exterior Cleaning</li>
-              <li><i class="fa-solid fa-check text-success"></i> Interior Wet Cleaning</li>
-              <li><i class="fa-solid fa-times text-danger"></i> Window Wiping</li>
-            </ul>
-            <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#appointmentModal">Book Now</a>
-          </div>
-        </div>
-      </div>
+<div class="container">
+  <div class="row justify-content-center gx-4 gy-4 px-3">
+    <?php if ($result->num_rows > 0): ?>
+        <?php while($row = $result->fetch_assoc()): ?>
+            <div class="col-md-4 d-flex">
+                <div class="card h-100 w-100 p-3">
+                          <!-- flipcard here!!! -->
+                    <div class="flip-card">
+                      <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                           <img src="<?php echo htmlspecialchars($row['img_url']); ?>" alt="Service Image" class="card-img-top">
+                        </div>
+                        <div class="flip-card-back" >
+                           <!-- content / back of the flip-card -->
+                         <a href="appointment_modal.php" class="btn btn-light btn-sm bg-wihte" data-bs-toggle="modal" data-bs-target="#appointmentModal">  
+                          Book Now
+                         </a>
+                        </div>
+                        </div>
+                    </div>
 
-      <!-- Complex Cleaning -->
-      <div class="col-md-4 mb-4">
-        <div class="card text-center h-100 shadow">
-          <div class="card-body">
-            <h5 class="card-title text-uppercase">Complex Cleaning</h5>
-            <h2 class="card-price">Rs. <span class="fs-1">300</span>.99</h2>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li><i class="fa-solid fa-check text-success"></i> Seats Washing</li>
-              <li><i class="fa-solid fa-check text-success"></i> Vacuum Cleaning</li>
-              <li><i class="fa-solid fa-check text-success"></i> Exterior Cleaning</li>
-              <li><i class="fa-solid fa-check text-success"></i> Interior Wet Cleaning</li>
-              <li><i class="fa-solid fa-check text-success"></i> Window Wiping</li>
-            </ul>
-            <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#appointmentModal">Book Now</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center"><?php echo htmlspecialchars($row['title']); ?></h5>
+                        <p class="card-text"><?php echo htmlspecialchars($row['description']); ?></p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <strong>Price:</strong> ₱<?php echo $row['price']; ?>
+                    </div>
+                </div>
+            </div>
+        <?php endwhile; ?>
+    <?php else: ?>
+        <p class="text-center">No services found.</p>
+    <?php endif; ?>
   </div>
-</section>
+</div>
+
 
 
 <script>
@@ -157,5 +182,8 @@
 <?php include 'booking_modal.php'; ?>
   <?php include 'appointment_modal.php'; ?>
    <?php include '../include/footer.php'; ?>
+
+   <!-- Before </body> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

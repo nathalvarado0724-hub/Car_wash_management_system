@@ -1,3 +1,6 @@
+<?php
+include '../../page/dashboard_data.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +9,7 @@
   <title>Admin Dashboard</title>
    
   <link rel="stylesheet" href="../../assets/css/admin_navbar.css" />
+    <link rel="stylesheet" href="../../assets/css/admin_dashboard.css" />
   <!-- Bootstrap & Font Awesome -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -17,10 +21,10 @@
 
   <!-- Sidebar -->
   <div class="sidebar d-flex flex-column p-3">
-<div class="text-center mb-4">
-  <img src="../../assets/logo.png" alt="logo" class="sidebar-logo">
-  <h4 class="mt-2">Admin Page</h4>
-</div>
+    <div class="text-center mb-4">
+      <img src="../../assets/logo.png" alt="logo" class="sidebar-logo">
+      <h4 class="mt-2">Admin Page</h4>
+    </div>
     <ul class="nav nav-pills flex-column mb-auto">
       <li>
         <a href="dashboard.php" class="nav-link active">
@@ -65,6 +69,41 @@
       </li>
     </ul>
   </div>
+
+
+ <div class="dashboard-header">
+    <h1>CAR WASH MANAGEMENT SYSTEM</h1>
+  </div>
+
+<div class="cards-container">
+  <a href="./bookings/all_bookings.php" class="card" style="text-decoration:none; color:inherit;">
+    <i class="fa-solid fa-list"></i>
+    <div class="title">Total Bookings</div>
+    <div class="count"><?= $newBookingsCount + $completedBookingsCount ?></div>
+  </a>
+
+  <a href="./bookings/new_bookings.php" class="card" style="text-decoration:none; color:inherit;">
+    <i class="fa-solid fa-list"></i>
+    <div class="title">New Bookings</div>
+    <div class="count"><?= $newBookingsCount ?></div>
+  </a>
+
+  <a href="./bookings/completed_bookings.php" class="card" style="text-decoration:none; color:inherit;">
+    <i class="fa-solid fa-list"></i>
+    <div class="title">Completed Bookings</div>
+    <div class="count"><?= $completedBookingsCount ?></div>
+  </a>
+
+  <a href="inventory_management.php" class="card" style="text-decoration:none; color:inherit;">
+    <i class="fa-solid fa-folder"></i>
+    <div class="title">Inventory Management</div>
+    <div class="count"><?= $inventoryCount ?></div>
+  </a>
+</div>
+
+
+
+   
 
 
 </body>

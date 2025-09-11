@@ -13,39 +13,10 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <style>
-    body {
-      background-color: #f8f9fa;
-    }
-    .contact-header {
-      background-color: #7089adff;
-      color: white;
-      text-align: center;
-      padding: 50px 0;
-    }
-    .contact-header h2 {
-      font-size: 2rem;
-      font-weight: bold;
-    }
-    .contact-section {
-      padding: 50px 0;
-    }
-    .contact-info {
-      background: #7089ad;
-      color: white;
-      padding: 25px;
-      border-radius: 8px;
-    }
-    #star-rating i {
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-    #star-rating i.text-warning {
-      color: #ffc107 !important;
-    }
 
-  </style>
+      <!-- In <head> -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
   <!-- Navbar -->
@@ -222,5 +193,8 @@
 <?php include 'booking_modal.php'; ?>
   <?php include 'appointment_modal.php'; ?>
     <?php include '../include/footer.php'; ?>
+
+    <!-- Before </body> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

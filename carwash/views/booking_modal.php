@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- booking_modal.php -->
+  <!-- booking_modal.php -->
 <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
@@ -16,7 +16,20 @@
       </div>
       <div class="modal-body">
         <div id="bookingContent">
-          <p>Loading your booking details...</p>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Car Type</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="bookingTableBody">
+              <!-- Booking data will be inserted here -->
+            </tbody>
+          </table>
         </div>
       </div>
       <div class="modal-footer">
@@ -25,6 +38,26 @@
     </div>
   </div>
 </div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$('#bookingModal').on('show.bs.modal', function () {
+  $.ajax({
+    url: '../page/fetch_bookings.php',
+    method: 'POST',
+    data: { user_id: 1 }, // Replace with PHP session later
+    success: function(response) {
+      $('#bookingTableBody').html(response);
+    },
+    error: function() {
+      $('#bookingTableBody').html('<tr><td colspan="5">Error loading bookings.</td></tr>');
+    }
+  });
+});
+</script>
+
 
 </body>
 </html>

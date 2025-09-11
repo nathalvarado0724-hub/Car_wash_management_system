@@ -1,11 +1,19 @@
 <?php
 session_start();
-
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit;
-}
+    // Redirect to login page
+    header("Location: ../views/login.php");
+    exit;}
+    
+include '../model/db_connection.php';
+
+$db = new Database();
+$conn = $db->connect();
+
+$carouselSql = "SELECT title, description, img_url FROM services_tb";
+$carouselResult = $conn->query($carouselSql);
 ?>
+
 
   <!-- Head -->
   <!DOCTYPE html>
@@ -25,6 +33,10 @@ if (!isset($_SESSION['user_id'])) {
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- In <head> -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
   </head>
 
   <body>
@@ -93,45 +105,34 @@ if (!isset($_SESSION['user_id'])) {
       <!-- Carousel Section -->
       <div class="container my-carousel-wrapper p-3">
         <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-          <!-- Indicators -->
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="3" aria-label="Slide 4"></button>
-          </div>
-
-          <!-- Slides -->
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="https://baraqcleancarwash.com/wp-content/uploads/2025/01/beautiful-car-washing-service-scaled.jpg" class="d-block w-100" alt="Car wash">
+     
+             <!-- indicators -->
+        <div class="carousel-indicators">
+            <?php
+            $carouselResult->data_seek(0); // Reset result pointer to the start
+            $numSlides = $carouselResult->num_rows;
+            for ($i = 0; $i < $numSlides; $i++): ?>
+                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="<?= $i ?>" <?= $i === 0 ? 'class="active"' : '' ?>></button>
+            <?php endfor; ?>
+        </div>
+         <!--carouser content here-->
+        <div class="carousel-inner">
+          <?php
+          $isFirst = true;
+          while ($row = $carouselResult->fetch_assoc()):
+          ?>
+            <div class="carousel-item <?php echo $isFirst ? 'active' : ''; ?>">
+              <img src="<?php echo htmlspecialchars($row['img_url']); ?>" class="d-block w-100" alt="Service Image">
               <div class="carousel-caption d-none d-md-block">
-                <h5>Exterior Wash</h5>
-                <p>Basic cleaning of the vehicle's exterior, often including hand wash, rinse, and drying.</p>
+                <h5><?php echo htmlspecialchars($row['title']); ?></h5>
+                <p><?php echo htmlspecialchars($row['description']); ?></p>
               </div>
             </div>
-            <div class="carousel-item">
-              <img src="https://images.squarespace-cdn.com/content/v1/5cf81863a20dd2000179f584/639a56d3-dc72-4d15-afba-0e673ca24113/vci95f5uTDnY4U2ThLdxK2ABTAw9XvkP1671030463.jpg" class="d-block w-100" alt="Interior cleaning">
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Interior Cleaning</h5>
-                <p>Vacuuming, dusting, and cleaning of the vehicle's interior surfaces.</p>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img src="https://mawdetailcenter.com/wp-content/uploads/2022/05/shine-shop.jpg" class="d-block w-100" alt="Exterior wash">
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Detailing</h5>
-                <p>Comprehensive cleaning that may include waxing, polishing, and engine cleaning.</p>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img src="https://i.ytimg.com/vi/-EtS34QZIkg/maxresdefault.jpg" class="d-block w-100" alt="Exterior wash">
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Express Wash</h5>
-                <p>Quick service focusing on exterior cleaning, typically without interior detailing.</p>
-              </div>
-            </div>
-          </div>
+          <?php
+            $isFirst = false;
+          endwhile;
+          ?>
+        </div>
 
           <!-- Controls -->
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -143,6 +144,7 @@ if (!isset($_SESSION['user_id'])) {
             <span class="visually-hidden">Next</span>
           </button>
         </div>
+<h2>Welcome, <?php echo $_SESSION['username']; ?>!</h2>
 
         <!-- Link to Services -->
         <div class="link-service text-center mt-4">
@@ -276,5 +278,8 @@ if (!isset($_SESSION['user_id'])) {
        <?php include 'appointment_modal.php'; ?>
      <?php include 'booking_modal.php'; ?>
  <?php include '../include/footer.php'; ?>
+
+ <!-- Before </body> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
   </html>
