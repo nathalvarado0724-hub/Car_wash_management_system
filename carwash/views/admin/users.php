@@ -1,15 +1,24 @@
 <?php
-include '../../page/dashboard_data.php';
+session_start();
+require_once '../../model/admin_db.php';
+
+$db = new Database();
+$conn = $db->connect();
+
+$query = "SELECT user_id, username, email, contact FROM user_tb";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin Dashboard</title>
+  <title>Inventory Management</title>
    
   <link rel="stylesheet" href="../../assets/css/admin_navbar.css" />
-    <link rel="stylesheet" href="../../assets/css/admin_dashboard.css" />
   <!-- Bootstrap & Font Awesome -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -19,22 +28,23 @@ include '../../page/dashboard_data.php';
 
 <body>
 
+<div class="d-flex">
   <!-- Sidebar -->
-  <div class="sidebar d-flex flex-column p-3">
+  <div class="sidebar d-flex flex-column p-3" style="width: 250px; height: 100vh;">
     <div class="text-center mb-4">
       <img src="../../assets/logo.png" alt="logo" class="sidebar-logo">
       <h4 class="mt-2">Admin Page</h4>
     </div>
     <ul class="nav nav-pills flex-column mb-auto">
       <li>
-        <a href="dashboard.php" class="nav-link active">
+        <a href="dashboard.php" class="nav-link">
           <i class="fa-solid fa-house"></i> Dashboard
         </a>
       </li>
- 
+
       <!-- Booking Dropdown -->
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="bookingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a class="nav-link dropdown-toggle " href="#" id="bookingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="fa-solid fa-calendar-check"></i> Bookings
         </a>
         <ul class="dropdown-menu">
@@ -51,10 +61,10 @@ include '../../page/dashboard_data.php';
       </li>
       
       <li>
-        <a href="users.php" class="nav-link">
+        <a href="users.php" class="nav-link active">
             <i class="fa-regular fa-user"></i> Users
        </a>
-      </li>
+      </li>  
 
       <!-- Pages Dropdown -->
       <li class="nav-item dropdown">
@@ -76,48 +86,37 @@ include '../../page/dashboard_data.php';
     </ul>
   </div>
 
-
- <div class="dashboard-header">
-    <h1>CAR WASH MANAGEMENT SYSTEM</h1>
+  <div class="container mt-5">
+  <h2 class="mb-4">Clients List</h2>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Contact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php if (!empty($users)): ?>
+          <?php foreach ($users as $user): ?>
+            <tr>
+              <td><?= htmlspecialchars($user['user_id']) ?></td>
+              <td><?= htmlspecialchars($user['username']) ?></td>
+              <td><?= htmlspecialchars($user['email']) ?></td>
+              <td><?= htmlspecialchars($user['contact']) ?></td>
+            </tr>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <tr>
+            <td colspan="4" class="text-center">No users found</td>
+          </tr>
+        <?php endif; ?>
+      </tbody>
+    </table>
   </div>
-
-<div class="cards-container">
-  <a href="./bookings/all_bookings.php" class="card" style="text-decoration:none; color:inherit;">
-    <i class="fa-solid fa-list"></i>
-    <div class="title">Total Bookings</div>
-    <div class="count"><?= $newBookingsCount + $completedBookingsCount ?></div>
-  </a>
-
-  <a href="./bookings/new_bookings.php" class="card" style="text-decoration:none; color:inherit;">
-    <i class="fa-solid fa-list"></i>
-    <div class="title">New Bookings</div>
-    <div class="count"><?= $newBookingsCount ?></div>
-  </a>
-
-  <a href="./bookings/completed_bookings.php" class="card" style="text-decoration:none; color:inherit;">
-    <i class="fa-solid fa-list"></i>
-    <div class="title">Completed Bookings</div>
-    <div class="count"><?= $completedBookingsCount ?></div>
-  </a>
-
-  <a href="inventory_management.php" class="card" style="text-decoration:none; color:inherit;">
-    <i class="fa-solid fa-folder"></i>
-    <div class="title">Inventory Management</div>
-    <div class="count"><?= $inventoryCount ?></div>
-  </a>
-
-    <a href="users.php" class="card" style="text-decoration:none; color:inherit;">
-    <i class="fa-regular fa-user"></i>
-    <div class="title"> User</div>
-    <div class="count"><?= $userCount ?></div>
-  </a>
-
 </div>
-
-
-
-   
-
 
 </body>
 </html>

@@ -1,3 +1,53 @@
+<?php
+require_once '../../model/admin_db.php';
+require_once '../../model/inventory.php';
+
+$db = new database();          
+$conn = $db->connect();             
+
+$inventory = new Inventory($conn);  // instantiate the Inventory class
+$items = $inventory->getAllItems(); // fetch items
+
+// Handle Delete Item
+if (isset($_GET['delete'])) {
+    $idToDelete = (int) $_GET['delete'];
+    if ($inventory->deleteItem($idToDelete)) {
+        // Redirect to remove ?delete= from URL
+        header("Location: inventory_management.php");
+        exit();
+    } else {
+        echo "<script>alert('Failed to delete item.');</script>";
+    }
+    
+}
+
+
+// Handle Add Item
+if (isset($_POST['add'])) {
+    $name = $_POST['item_name'];
+    $desc = $_POST['description'];
+    $qty = $_POST['quantity'];
+    $price = $_POST['unit_price'];
+
+    // Handle image upload
+    $imageName = $_FILES['image']['name'];
+    $imageTmp = $_FILES['image']['tmp_name'];
+    $targetDir = "../../assets/uploads/";
+    $targetFile = $targetDir . basename($imageName);
+
+    if (move_uploaded_file($imageTmp, $targetFile)) {
+        // Save to DB
+        $inventory->addItem($name, $desc, $qty, $price, $imageName);
+    } else {
+        echo "<script>alert('Image upload failed.');</script>";
+    }
+
+    header("Location: inventory_management.php");
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +65,8 @@
 
 <body>
 
-  <!-- Sidebar -->
+<div class="d-flex">
+    <!-- Sidebar -->
   <div class="sidebar d-flex flex-column p-3">
 <div class="text-center mb-4">
   <img src="../../assets/logo.png" alt="logo" class="sidebar-logo">
@@ -45,7 +96,12 @@
           <i class="fa-solid fa-folder-open"></i> Inventory Management
         </a>
       </li>
-
+       
+      <li>
+        <a href="users.php" class="nav-link">
+            <i class="fa-regular fa-user"></i> Users
+       </a>
+      </li> 
       <!-- Pages Dropdown -->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -65,7 +121,68 @@
       </li>
     </ul>
   </div>
+  
+</div>
 
+  <div class="container mt-5">
+    <h2 class="mb-4">Inventory Management</h2>
+
+    <!-- Add Item Form -->
+    <form method="POST" enctype="multipart/form-data" class="row g-3 mb-4">
+    <div class="col-md-2">
+        <input type="file" name="image" class="form-control" accept="image/*" required>
+    </div>
+    <div class="col-md-2">
+        <input type="text" name="item_name" class="form-control" placeholder="Item Name" required>
+    </div>
+    <div class="col-md-2">
+        <input type="text" name="description" class="form-control" placeholder="Description" required>
+    </div>
+    <div class="col-md-2">
+        <input type="number" name="quantity" class="form-control" placeholder="Quantity" required>
+    </div>
+    <div class="col-md-2">
+        <input type="number" step="0.01" name="unit_price" class="form-control" placeholder="Unit Price" required>
+    </div>
+    <div class="col-md-2">
+        <button type="submit" name="add" class="btn btn-primary w-100">Add Item</button>
+    </div>
+</form>
+
+
+    <!-- Inventory Table -->
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Item Name</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Date Added</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($items as $item): ?>
+            <tr>
+                <td><?= $item['inventory_id'] ?></td>
+                <td><?= htmlspecialchars($item['item_name']) ?></td>
+                <td><img src="../../assets/uploads/<?= htmlspecialchars($item['item_img']) ?>" width="100" height="100" alt="Image"></td>
+                <td><?= htmlspecialchars($item['description']) ?></td>
+                <td><?= $item['quantity'] ?></td>
+                <td><?= number_format($item['unit_price'], 2) ?></td>
+                <td><?= $item['date_added'] ?></td>
+                <td>
+                    <a href="?delete=<?= $item['inventory_id'] ?>" class="btn btn-sm btn-danger"
+                       onclick="return confirm('Delete this item?');"><i class="fa fa-trash"></i>Delete</a> 
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

@@ -144,7 +144,7 @@ $carouselResult = $conn->query($carouselSql);
             <span class="visually-hidden">Next</span>
           </button>
         </div>
-<h2>Welcome, <?php echo $_SESSION['username']; ?>!</h2>
+ 
 
         <!-- Link to Services -->
         <div class="link-service text-center mt-4">

@@ -87,6 +87,12 @@ $result = $conn->query($sql);
           <i class="fa-solid fa-folder-open"></i> Inventory Management
         </a>
       </li>
+      
+      <li>
+        <a href="../users.php" class="nav-link">
+            <i class="fa-regular fa-user"></i> Users
+       </a>
+      </li>  
 
       <!-- Pages Dropdown -->
       <li class="nav-item dropdown">

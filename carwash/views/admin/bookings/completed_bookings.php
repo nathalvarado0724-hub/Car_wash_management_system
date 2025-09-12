@@ -90,6 +90,12 @@ $result = $conn->query($sql);
         </a>
       </li>
 
+      <li>
+        <a href="../users.php" class="nav-link">
+            <i class="fa-regular fa-user"></i> Users
+       </a>
+      </li>  
+      
       <!-- Pages Dropdown -->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -32,4 +32,11 @@ if (!$inventoryResult) {
     die("Error in query (inventory): " . $conn->error);
 }
 $inventoryCount = $inventoryResult->fetch_assoc()['count'] ?? 0;
+
+// Query for users
+$userResult = $conn->query("SELECT COUNT(*) as count FROM user_tb");
+if (!$userResult) {
+    die("Error in query (users): " . $conn->error);
+}
+$userCount = $userResult->fetch_assoc()['count'] ?? 0;
 ?>

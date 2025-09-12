@@ -81,3 +81,14 @@
   transform: scale(1.05);
   cursor: pointer;
 }
+        /* Header area */
+    .dashboard-header {
+      background-color: #7993b1; /* Soft blue from your screenshot */
+      padding: 20px 15px;
+      text-align: center;
+      color: white;
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: 1px;
+      margin-left: 250px; /* Adjust if sidebar width changes */
+    }

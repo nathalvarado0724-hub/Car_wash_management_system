@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +27,7 @@
 </head>
 <body>
   
-  <form action="" method="POST" class="container d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh; max-width: 400px;">
+ <form action="../../page/login_admin_process.php" method="POST"  class="container d-flex flex-column align-items-center justify-content-center" style="min-height: 100vh; max-width: 400px;">
     
     <div class="login-box text-center p-4 shadow rounded" style="width: 100%;">
       <img src="../../assets/logo.png" alt="Logo" class="login-img mb-3" style="max-width: 100px;" />
@@ -38,7 +39,7 @@
           type="text"
           id="name"
           name="name"
-          placeholder="Your Fullname"
+          placeholder="Your username"
           class="form-control"
           required
         />
